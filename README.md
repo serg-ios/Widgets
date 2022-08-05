@@ -24,6 +24,4 @@ To preview the placeholder view, do a `Group` inside the preview, and both views
 
 There is a SwiftUI modifier `.redacted(reason: .placeholder)` that placeholders SwiftUI views very quickly.
 
-<img src="./screenshots/placeholder.jpg" class="center" width="250">
-<img src="./screenshots/widget.jpg" class="center" width="250">
-<img src="./screenshots/snapshot.jpg" class="center" width="250">
+<img src="./screenshots/placeholder.jpg" class="center" width="250"> <img src="./screenshots/widget.jpg" class="center" width="250"> <img src="./screenshots/snapshot.jpg" class="center" width="250">
