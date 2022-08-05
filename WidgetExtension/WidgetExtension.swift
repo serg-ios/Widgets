@@ -9,61 +9,74 @@ import WidgetKit
 import SwiftUI
 import Intents
 
-struct Provider: IntentTimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent())
-    }
-
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration)
+struct Provider: TimelineProvider {
+    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> Void) {
+        let entry = SimpleEntry(emoji: "🐙", date: .now)
         completion(entry)
     }
-
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
-            entries.append(entry)
+    
+    func placeholder(in context: Context) -> SimpleEntry {
+        SimpleEntry(emoji: "placeholder", date: .now)
+    }
+    
+    func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> Void) {
+        var dates: [Date] = [Date.now]
+        for hourOffset in 1 ..< 6 {
+            let entryDate = Calendar.current.date(byAdding: .second, value: hourOffset, to: dates.last!)!
+            dates.append(entryDate)
         }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
+        let timeline = Timeline(entries: [
+            SimpleEntry(emoji: "🐞", date: dates[0]),
+            SimpleEntry(emoji: "🐠", date: dates[1]),
+            SimpleEntry(emoji: "🦕", date: dates[2]),
+            SimpleEntry(emoji: "🐡", date: dates[3]),
+            SimpleEntry(emoji: "🦞", date: dates[4]),
+            SimpleEntry(emoji: "🦄", date: dates[5]),
+        ], policy: .atEnd)
         completion(timeline)
     }
 }
 
 struct SimpleEntry: TimelineEntry {
+    let emoji: String
     let date: Date
-    let configuration: ConfigurationIntent
 }
 
 struct WidgetExtensionEntryView : View {
     var entry: Provider.Entry
-
+    
     var body: some View {
-        Text(entry.date, style: .time)
+        Text(entry.emoji)
+    }
+}
+
+struct PlaceholderView: View {
+    var body: some View {
+        Text("placeholder")
+            .redacted(reason: .placeholder)
     }
 }
 
 @main
 struct WidgetExtension: Widget {
     let kind: String = "WidgetExtension"
-
+    
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
+        StaticConfiguration(kind: kind, provider: Provider(), content: { entry in
             WidgetExtensionEntryView(entry: entry)
-        }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        })
+        .configurationDisplayName("Name of the widget")
+        .description("Description of the widget.")
+        .supportedFamilies([.systemSmall])
     }
 }
 
 struct WidgetExtension_Previews: PreviewProvider {
     static var previews: some View {
-        WidgetExtensionEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        Group {
+            WidgetExtensionEntryView(entry: SimpleEntry(emoji: "🐨", date: Date()))
+            PlaceholderView()
+        }
+        .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }

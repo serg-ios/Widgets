@@ -22,4 +22,4 @@ The timeline provider provides snapshots when we want one entry (widget gallery)
 
 To preview the placeholder view, do a `Group` inside the preview, and both views will be previewed (the placeholder and the actual widget).
 
-There is a SwiftUI modifier `(.isPlaceholder(true))` that placeholders SwiftUI views very quickly.
+There is a SwiftUI modifier `.redacted(reason: .placeholder)` that placeholders SwiftUI views very quickly.
