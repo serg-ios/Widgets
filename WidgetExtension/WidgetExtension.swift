@@ -9,9 +9,19 @@ import WidgetKit
 import SwiftUI
 import Intents
 
-// MARK: - Widget extension
+// MARK: - Widget bundle
 
 @main
+struct AnimalsWidgetBundle: WidgetBundle {
+    @WidgetBundleBuilder
+    var body: some Widget {
+        WidgetExtension()
+        LargeWidgetExtension()
+    }
+}
+
+// MARK: - Widget extension
+
 struct LargeWidgetExtension: Widget {
     let kind: String = "LargeWidgetExtension"
     
@@ -41,6 +51,10 @@ struct WidgetExtension: Widget {
 struct WidgetExtension_Previews: PreviewProvider {
     static var previews: some View {
         Group {
+            PlaceholderView()
+                .previewContext(WidgetPreviewContext(family: .systemMedium))
+            WidgetExtensionEntryView(entry: .init(animal: .unicorn, date: .now))
+                .previewContext(WidgetPreviewContext(family: .systemMedium))
             LargeWidgetExtensionEntryView()
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
             LargePlaceholderView()
@@ -63,7 +77,7 @@ struct LargeWidgetExtensionEntryView: View {
             }
             .frame(maxHeight: .infinity)
             .padding(.horizontal, 40)
-            .font(.body)
+            .font(.largeTitle)
         }
     }
 }
@@ -111,7 +125,7 @@ struct WidgetExtensionEntryView : View {
             .padding(20)
             .widgetURL(entry.animal.url)
         default:
-            fatalError("Not implemented yet.")
+            Text("Widget family supported.")
         }
     }
 }

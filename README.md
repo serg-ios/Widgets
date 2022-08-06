@@ -93,10 +93,18 @@ Use `.widgetURL` modifier in the widget view.
 
 Use `.onOpenURL` in the SwiftUI perform an action depending on the received URL.
 
+## [Widgets Code-along, part 3: Advancing timelines](https://developer.apple.com/videos/play/wwdc2020/10036/)
 
+Use `WidgetBundle` to have different kinds of widgets in your apps.
 
+Each of this kinds can have implemented all the families.
 
+Move `@main` to the widget bundle, and mark its body as `@WidgetBundleBuilder`.
 
+<p align="center">
+	<img src="./screenshots/bundle.jpg" width="30%">
+	<img src="./screenshots/large.jpg" width="30%">
+</p>
 
 
 
