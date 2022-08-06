@@ -114,9 +114,54 @@ In bigger widget families we can have many clickable areas, we can leverage Swif
 	<img src="./screenshots/select3.jpg" width="30%">
 </p>
 
+## [Complications and widgets: Reloaded](https://developer.apple.com/videos/play/wwdc2022/10050/)
 
+Learn about the latest improvements to WidgetKit that help power complex complications on watchOS and can help you create Lock Screen widgets for iPhone. 
 
+### Complication timeline
 
+New widget families:
+
+`.accessoryRectangular`
+
+`.accessoryCircular`: replaces ClockKit's `.graphicCircular`.
+
+`.accessoryInline`
+
+`.accessoryCorner` (Specific to watchOS).
+
+### Colors
+
+The widget can be full color, accented, or vibrant. This is the `WidgetRenderingMode` type, accessible from the Environment.
+
+`.fullColor` -> Original colors of the widget
+
+`.accented` -> Two colors, call `.widgetAccentable()`
+
+`.vibrant` -> Desaturated, adapting to the grayscale of the content behind it. Use `AccessoryWidgetBackground`.
+
+### Making glanceable views
+
+Use SwiftUI's `ProgressView` for the `.accessoryCircular` with `.circular` style.
+
+Use `ViewThatFits` to provides alternatives in case a view is too big for the space available.
+
+In the `.accessoryRectangular`, set the title as `.widgetAccentable()`.
+
+<p align="center">
+	<img src="./screenshots/inline.jpg" width="30%">
+	<img src="./screenshots/circular.jpg" width="30%">
+	<img src="./screenshots/rectangular.jpg" width="30%">
+</p>
+
+### Privacy
+
+To hide sensitive data like the age of the animal ;-), use the modifier `.privacySensitive()`.
+
+<p align="center">
+	<img src="./screenshots/setsensitive.jpg" width="45%">
+	<img src="./screenshots/sensitive.jpg" width="45%">
+</p>
 
 
 

@@ -44,7 +44,7 @@ struct WidgetExtension: Widget {
         })
         .configurationDisplayName("Name of the widget")
         .description("Description of the widget.")
-        .supportedFamilies([.systemSmall, .systemMedium])
+        .supportedFamilies([.systemSmall, .systemMedium, .accessoryInline, .accessoryCircular, .accessoryRectangular])
     }
 }
 
@@ -59,6 +59,16 @@ struct WidgetExtension_Previews: PreviewProvider {
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
             LargePlaceholderView()
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
+            
+            WidgetExtensionEntryView(entry: .init(animal: .unicorn, date: .now))
+                .previewContext(WidgetPreviewContext(family: .accessoryInline))
+                .previewDisplayName("Inline")
+            WidgetExtensionEntryView(entry: .init(animal: .dinosaur, date: .now))
+                .previewContext(WidgetPreviewContext(family: .accessoryCircular))
+                .previewDisplayName("Circular")
+            WidgetExtensionEntryView(entry: .init(animal: .unicorn, date: .now))
+                .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+                .previewDisplayName("Rectangular")
         }
     }
 }
@@ -126,6 +136,28 @@ struct WidgetExtensionEntryView : View {
             .font(.largeTitle)
             .padding(20)
             .widgetURL(entry.animal.url)
+        case .accessoryInline:
+            ViewThatFits {
+                Text("\(entry.animal.emoji) is called \(entry.animal.name) and is \(entry.animal.age)")
+                Text("\(entry.animal.emoji) \(entry.animal.name) \(entry.animal.age)")
+            }
+        case .accessoryCircular:
+            ZStack {
+                ProgressView(value: Float(entry.animal.age), total: Float(AnimalDetail.unicorn.age))
+                    .progressViewStyle(.circular)
+                Text(entry.animal.emoji)
+                    .font(.largeTitle)
+            }
+        case .accessoryRectangular:
+            VStack(alignment: .leading) {
+                Text(entry.animal.name)
+                    .font(.headline)
+                    .widgetAccentable()
+                Text("\(entry.animal.age)")
+                    .privacySensitive()
+                Text(entry.animal.emoji)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
         default:
             Text("Widget family supported.")
         }
