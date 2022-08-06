@@ -69,10 +69,12 @@ struct LargeWidgetExtensionEntryView: View {
     var body: some View {
         VStack {
             ForEach(AnimalDetail.allCases) { animal in
-                HStack {
-                    Text(animal.emoji)
-                    Text(animal.name)
-                        .frame(maxWidth: .infinity)
+                Link(destination: animal.url) {
+                    HStack {
+                        Text(animal.emoji)
+                        Text(animal.name)
+                            .frame(maxWidth: .infinity)
+                    }
                 }
             }
             .frame(maxHeight: .infinity)

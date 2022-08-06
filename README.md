@@ -106,7 +106,13 @@ Move `@main` to the widget bundle, and mark its body as `@WidgetBundleBuilder`.
 	<img src="./screenshots/large.jpg" width="30%">
 </p>
 
+In bigger widget families we can have many clickable areas, we can leverage SwiftUI's `Link` component.
 
+<p align="center">
+	<img src="./screenshots/select1.jpg" width="30%">
+	<img src="./screenshots/select2.jpg" width="30%">
+	<img src="./screenshots/select3.jpg" width="30%">
+</p>
 
 
 
