@@ -7,13 +7,15 @@
 
 import Foundation
 
-enum AnimalDetail {
+enum AnimalDetail: CaseIterable, Identifiable {
     case ladybug
     case dinosaur
     case pufferFish
     case fish
     case unicorn
     case lobster
+    
+    var id: String { self.emoji }
     
     var emoji: String {
         switch self {

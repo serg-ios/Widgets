@@ -12,9 +12,22 @@ import Intents
 // MARK: - Widget extension
 
 @main
+struct LargeWidgetExtension: Widget {
+    let kind: String = "LargeWidgetExtension"
+    
+    var body: some WidgetConfiguration {
+        IntentConfiguration(kind: kind, intent: AnimalSelectionIntent.self, provider: Provider(), content: { entry in
+            LargeWidgetExtensionEntryView()
+        })
+        .configurationDisplayName("Large widget")
+        .description("Shows many animals.")
+        .supportedFamilies([.systemLarge])
+    }
+}
+
 struct WidgetExtension: Widget {
     let kind: String = "WidgetExtension"
-    
+
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: AnimalSelectionIntent.self, provider: Provider(), content: { entry in
             WidgetExtensionEntryView(entry: entry)
@@ -28,13 +41,37 @@ struct WidgetExtension: Widget {
 struct WidgetExtension_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            WidgetExtensionEntryView(entry: SimpleEntry(
-                animal: .unicorn,
-                date: Date()
-            ))
-            PlaceholderView()
+            LargeWidgetExtensionEntryView()
+                .previewContext(WidgetPreviewContext(family: .systemLarge))
+            LargePlaceholderView()
+                .previewContext(WidgetPreviewContext(family: .systemLarge))
         }
-        .previewContext(WidgetPreviewContext(family: .systemMedium))
+    }
+}
+
+// MARK: - Large widget view
+
+struct LargeWidgetExtensionEntryView: View {
+    var body: some View {
+        VStack {
+            ForEach(AnimalDetail.allCases) { animal in
+                HStack {
+                    Text(animal.emoji)
+                    Text(animal.name)
+                        .frame(maxWidth: .infinity)
+                }
+            }
+            .frame(maxHeight: .infinity)
+            .padding(.horizontal, 40)
+            .font(.body)
+        }
+    }
+}
+
+struct LargePlaceholderView: View {
+    var body: some View {
+        LargeWidgetExtensionEntryView()
+            .redacted(reason: .placeholder)
     }
 }
 
