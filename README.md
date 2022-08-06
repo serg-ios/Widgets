@@ -25,3 +25,94 @@ To preview the placeholder view, do a `Group` inside the preview, and both views
 There is a SwiftUI modifier `.redacted(reason: .placeholder)` that placeholders SwiftUI views very quickly.
 
 <img src="./screenshots/placeholder.jpg" class="center" width="250"> <img src="./screenshots/widget.jpg" class="center" width="250"> <img src="./screenshots/snapshot.jpg" class="center" width="250">
+
+## [Widgets Code-along, part 2: Alternate timelines](https://developer.apple.com/videos/play/wwdc2020/10035/)
+
+Find out how you can integrate system intelligence into your widgets to help them dynamically change at different points during the day and surface the most relevant information. Explore core timeline concepts, support multiple widget families, and learn how to make your widget configurable.
+
+### Families
+
+`.systemSmall`
+
+`.systemMedium`
+
+`.systemLarge`
+
+Same concepts as complications' families.
+
+### Timelines
+
+How do we provide more entries to the timeline when it's finished?
+
+Pick a policy: 
+
+`.atEnd` creates a new timeline when the current finishes.
+
+`.after(date)` creates a new timeline when the date arrives.
+
+`.never` doesn't create a new timeline when the current finishes.
+
+Other option is to let the widget decide when to update, the system intelligently schedules updates.
+
+### Configuration
+
+SiriKit, just for having configuration our widget is eligible for intelligent system behaviours.
+
+The core technology for configuration is `INIntent`, specifically custom intents.
+
+[Add Configuration and Intelligence to your Widgets](https://developer.apple.com/videos/play/wwdc2020/10194/)
+
+### Deep linking
+
+Do not have animation or custom interactions.
+
+But we can link them into our app.
+
+`.systemSmall` -> 1 tap area
+
+`.systemMedium`, `.systemLarge` -> can leverage SwiftUI's `Link` to create multiple linkable areas within the Widget.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
