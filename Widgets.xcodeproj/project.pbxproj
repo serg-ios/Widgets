@@ -86,7 +86,6 @@
 		49F74463289D59D90076D251 = {
 			isa = PBXGroup;
 			children = (
-				49076F48289E4B28000E5C2C /* AnimalSelection.intentdefinition */,
 				49F7446E289D59D90076D251 /* Widgets */,
 				49F74487289D5A2D0076D251 /* WidgetExtension */,
 				49F74482289D5A2C0076D251 /* Frameworks */,
@@ -136,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				49F74488289D5A2D0076D251 /* WidgetExtension.swift */,
+				49076F48289E4B28000E5C2C /* AnimalSelection.intentdefinition */,
 				49F7448A289D5A2D0076D251 /* WidgetExtension.intentdefinition */,
 				49F7448B289D5A2E0076D251 /* Assets.xcassets */,
 				49F7448D289D5A2E0076D251 /* Info.plist */,

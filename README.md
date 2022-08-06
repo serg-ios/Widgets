@@ -73,6 +73,12 @@ The core technology for configuration is `INIntent`, specifically custom intents
   <img src="./screenshots/enum.jpg" width="30%">
 </p>
 
+<p align="center">
+	<img src="./screenshots/edit.jpg" width="30%">
+	<img src="./screenshots/name.jpg" width="30%">
+	<img src="./screenshots/choose.jpg" width="30%">
+</p>
+
 ### Deep linking
 
 Do not have animation or custom interactions.
