@@ -43,6 +43,15 @@ struct SimpleEntry: TimelineEntry {
     let name: String
     let age: Int
     let date: Date
+    let relevance: TimelineEntryRelevance?
+    
+    init(emoji: String, name: String, age: Int, date: Date) {
+        self.emoji = emoji
+        self.name = name
+        self.age = age
+        self.date = date
+        self.relevance = .init(score: Float(age))
+    }
 }
 
 struct WidgetExtensionEntryView : View {

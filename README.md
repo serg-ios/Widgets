@@ -54,6 +54,8 @@ Pick a policy:
 
 Other option is to let the widget decide when to update, the system intelligently schedules updates.
 
+Using relevance (optional property in TimelineEntry) we can give hints to our system to know when to update intelligently our widgets.
+
 ### Configuration
 
 SiriKit, just for having configuration our widget is eligible for intelligent system behaviours.
