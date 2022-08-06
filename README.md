@@ -89,7 +89,9 @@ But we can link them into our app.
 
 `.systemMedium`, `.systemLarge` -> can leverage SwiftUI's `Link` to create multiple linkable areas within the Widget.
 
+Use `.widgetURL` modifier in the widget view.
 
+Use `.onOpenURL` in the SwiftUI perform an action depending on the received URL.
 
 
 

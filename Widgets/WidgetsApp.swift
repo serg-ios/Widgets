@@ -11,7 +11,7 @@ import SwiftUI
 struct WidgetsApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(text: AnimalDetail.unicorn.emoji)
         }
     }
 }

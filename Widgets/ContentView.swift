@@ -8,18 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var text: String
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
+        Text(text)
+            .font(.largeTitle)
+            .onOpenURL(perform: { url in
+                switch url {
+                case AnimalDetail.unicorn.url:
+                    text = AnimalDetail.unicorn.emoji
+                case AnimalDetail.fish.url:
+                    text = AnimalDetail.fish.emoji
+                case AnimalDetail.pufferFish.url:
+                    text = AnimalDetail.pufferFish.emoji
+                case AnimalDetail.lobster.url:
+                    text = AnimalDetail.lobster.emoji
+                case AnimalDetail.dinosaur.url:
+                    text = AnimalDetail.dinosaur.emoji
+                case AnimalDetail.ladybug.url:
+                    text = AnimalDetail.ladybug.emoji
+                default:
+                    fatalError("Animal not supported.")
+                }
+            })
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(text: AnimalDetail.unicorn.emoji)
     }
 }

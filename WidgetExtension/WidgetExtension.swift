@@ -53,6 +53,7 @@ struct WidgetExtensionEntryView : View {
                 Text("\(entry.animal.age)")
             }
             .font(.body)
+            .widgetURL(entry.animal.url)
         case .systemMedium:
             HStack(alignment: .center) {
                 VStack(alignment: .center) {
@@ -71,6 +72,7 @@ struct WidgetExtensionEntryView : View {
             }
             .font(.largeTitle)
             .padding(20)
+            .widgetURL(entry.animal.url)
         default:
             fatalError("Not implemented yet.")
         }
@@ -98,66 +100,6 @@ struct SimpleEntry: TimelineEntry {
         self.animal = animal
         self.date = date
         self.relevance = .init(score: Float(animal.age))
-    }
-}
-
-enum AnimalDetail {
-    case ladybug
-    case dinosaur
-    case pufferFish
-    case fish
-    case unicorn
-    case lobster
-    
-    var emoji: String {
-        switch self {
-        case .ladybug:
-            return "🐞"
-        case .dinosaur:
-            return "🦕"
-        case .pufferFish:
-            return "🐡"
-        case .fish:
-            return "🐠"
-        case .unicorn:
-            return "🦄"
-        case .lobster:
-            return "🦞"
-        }
-    }
-
-    var name: String {
-        switch self {
-        case .ladybug:
-            return "Ladybug"
-        case .dinosaur:
-            return "Dinosaur"
-        case .pufferFish:
-            return "Puffer fish"
-        case .fish:
-            return "Cute fish"
-        case .unicorn:
-            return "Unicorn"
-        case .lobster:
-            return "Lobster"
-        }
-    }
-    
-    var age: Int {
-        switch self {
-        case .ladybug:
-            return 1
-        case .dinosaur:
-            return 100
-        case .pufferFish:
-            return 2
-        case .fish:
-            return 3
-        case .unicorn:
-            return 999
-        case .lobster:
-            return 4
-        }
     }
 }
 
