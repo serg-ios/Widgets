@@ -24,7 +24,11 @@ To preview the placeholder view, do a `Group` inside the preview, and both views
 
 There is a SwiftUI modifier `.redacted(reason: .placeholder)` that placeholders SwiftUI views very quickly.
 
-<img src="./screenshots/placeholder.jpg" class="center" width="250"> <img src="./screenshots/widget.jpg" class="center" width="250"> <img src="./screenshots/snapshot.jpg" class="center" width="250">
+<p align="center">
+	<img src="./screenshots/placeholder.jpg" width="30%">
+	<img src="./screenshots/widget.jpg" width="30%">
+	<img src="./screenshots/snapshot.jpg" width="30%">
+</p>
 
 ## [Widgets Code-along, part 2: Alternate timelines](https://developer.apple.com/videos/play/wwdc2020/10035/)
 
@@ -54,7 +58,7 @@ Pick a policy:
 
 Other option is to let the widget decide when to update, the system intelligently schedules updates.
 
-Using relevance (optional property in TimelineEntry) we can give hints to our system to know when to update intelligently our widgets.
+Using relevance (optional property in `TimelineEntry`) we can give hints to our system to know when to update intelligently our widgets.
 
 ### Configuration
 
@@ -63,6 +67,11 @@ SiriKit, just for having configuration our widget is eligible for intelligent sy
 The core technology for configuration is `INIntent`, specifically custom intents.
 
 [Add Configuration and Intelligence to your Widgets](https://developer.apple.com/videos/play/wwdc2020/10194/)
+
+<p align="center">
+  <img src="./screenshots/intent.jpg" width="60%">
+  <img src="./screenshots/enum.jpg" width="30%">
+</p>
 
 ### Deep linking
 
@@ -73,7 +82,6 @@ But we can link them into our app.
 `.systemSmall` -> 1 tap area
 
 `.systemMedium`, `.systemLarge` -> can leverage SwiftUI's `Link` to create multiple linkable areas within the Widget.
-
 
 
 

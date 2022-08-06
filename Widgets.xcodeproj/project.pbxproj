@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49076F49289E4B28000E5C2C /* AnimalSelection.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 49076F48289E4B28000E5C2C /* AnimalSelection.intentdefinition */; };
+		49076F4A289E4B6E000E5C2C /* AnimalSelection.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 49076F48289E4B28000E5C2C /* AnimalSelection.intentdefinition */; };
 		49F74470289D59D90076D251 /* WidgetsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7446F289D59D90076D251 /* WidgetsApp.swift */; };
 		49F74472289D59D90076D251 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F74471289D59D90076D251 /* ContentView.swift */; };
 		49F74474289D59DA0076D251 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49F74473289D59DA0076D251 /* Assets.xcassets */; };
@@ -45,6 +47,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		49076F48289E4B28000E5C2C /* AnimalSelection.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = AnimalSelection.intentdefinition; sourceTree = "<group>"; };
+		49076F4B289E4B9F000E5C2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		49F7446C289D59D90076D251 /* Widgets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Widgets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49F7446F289D59D90076D251 /* WidgetsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsApp.swift; sourceTree = "<group>"; };
 		49F74471289D59D90076D251 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -82,6 +86,7 @@
 		49F74463289D59D90076D251 = {
 			isa = PBXGroup;
 			children = (
+				49076F48289E4B28000E5C2C /* AnimalSelection.intentdefinition */,
 				49F7446E289D59D90076D251 /* Widgets */,
 				49F74487289D5A2D0076D251 /* WidgetExtension */,
 				49F74482289D5A2C0076D251 /* Frameworks */,
@@ -101,6 +106,7 @@
 		49F7446E289D59D90076D251 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				49076F4B289E4B9F000E5C2C /* Info.plist */,
 				49F7446F289D59D90076D251 /* WidgetsApp.swift */,
 				49F74471289D59D90076D251 /* ContentView.swift */,
 				49F74473289D59DA0076D251 /* Assets.xcassets */,
@@ -240,6 +246,7 @@
 			files = (
 				49F74472289D59D90076D251 /* ContentView.swift in Sources */,
 				49F74470289D59D90076D251 /* WidgetsApp.swift in Sources */,
+				49076F49289E4B28000E5C2C /* AnimalSelection.intentdefinition in Sources */,
 				49F7448F289D5A2E0076D251 /* WidgetExtension.intentdefinition in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,6 +257,7 @@
 			files = (
 				49F7448E289D5A2E0076D251 /* WidgetExtension.intentdefinition in Sources */,
 				49F74489289D5A2D0076D251 /* WidgetExtension.swift in Sources */,
+				49076F4A289E4B6E000E5C2C /* AnimalSelection.intentdefinition in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +398,7 @@
 				DEVELOPMENT_TEAM = U4SDDHNW98;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Widgets/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -420,6 +429,7 @@
 				DEVELOPMENT_TEAM = U4SDDHNW98;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Widgets/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
