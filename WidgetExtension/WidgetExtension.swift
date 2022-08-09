@@ -83,6 +83,16 @@ struct WidgetExtension_Previews: PreviewProvider {
             WidgetExtensionEntryView(entry: .init(animal: .unicorn, date: .now))
                 .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
                 .previewDisplayName("Rectangular")
+
+            CitiesWidgetExtensionEntryView(city: .init(name: "Rome", temperature: "23 °C", precipitation: "45 %"))
+                .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+                .previewDisplayName("Cities rectangular")
+            CitiesWidgetExtensionEntryView(city: .init(name: "Rome", temperature: "23 °C", precipitation: "45 %"))
+                .previewContext(WidgetPreviewContext(family: .accessoryCircular))
+                .previewDisplayName("Cities circular")
+            CitiesWidgetExtensionEntryView(city: .init(name: "Rome", temperature: "23 °C", precipitation: "45 %"))
+                .previewContext(WidgetPreviewContext(family: .accessoryInline))
+                .previewDisplayName("Cities inline")
         }
     }
 }
@@ -90,9 +100,42 @@ struct WidgetExtension_Previews: PreviewProvider {
 // MARK: - Cities' widget view
 
 struct CitiesWidgetExtensionEntryView: View {
+    @Environment(\.widgetFamily) var family
+    
     let city: City
+
     var body: some View {
-        Text(city.name)
+        switch family {
+        case .accessoryInline:
+            Text("\(city.name) \(city.temperature) \(city.precipitation)")
+        case .accessoryCircular:
+            ZStack {
+                AccessoryWidgetBackground()
+                VStack {
+                    Text(city.temperature)
+                    Text(city.precipitation)
+                }
+            }
+        case .accessoryRectangular:
+            ZStack(alignment: .leading) {
+                AccessoryWidgetBackground()
+                    .cornerRadius(2)
+                HStack {
+                    Rectangle()
+                        .cornerRadius(2)
+                        .frame(width: 4)
+                    VStack(alignment: .leading) {
+                        Text(city.name)
+                            .font(.headline)
+                            .widgetAccentable(true)
+                        Text("Precipitation " + city.precipitation)
+                        Text("Temperature " + city.temperature)
+                    }
+                }
+            }
+        default:
+            EmptyView()
+        }
     }
 }
 
