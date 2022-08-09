@@ -28,7 +28,7 @@ struct CitiesWidgetExtension: Widget {
     
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: CitiesProvider(), content: { entry in
-            CitiesWidgetExtensionEntryView()
+            CitiesWidgetExtensionEntryView(city: entry.city)
         })
         .configurationDisplayName("Cities' widget")
         .description("Displays the weather in a city.")
@@ -90,8 +90,9 @@ struct WidgetExtension_Previews: PreviewProvider {
 // MARK: - Cities' widget view
 
 struct CitiesWidgetExtensionEntryView: View {
+    let city: City
     var body: some View {
-        Text("Cities' widget")
+        Text(city.name)
     }
 }
 
@@ -229,10 +230,17 @@ struct CitiesProvider: TimelineProvider {
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<CityEntry>) -> Void) {
-        let timeline = Timeline(entries: [
-            CityEntry(city: .init(name: "Roma", temperature: "33°C", precipitation: "23 %"), date: .now)
-        ], policy: .atEnd)
-        completion(timeline)
+        let path = Bundle.main.url(forResource: "cities", withExtension: "json")!
+        var request = URLRequest(url: path)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        URLSession.shared.dataTask(with: request) { data, _, _ in
+            let cities = try! JSONDecoder().decode(Cities.self, from: data!)
+            completion(.init(entries: {
+                cities.enumerated().map {
+                    .init(city: $0.element, date: .now.addingTimeInterval(5 * TimeInterval($0.offset)))
+                }
+            }(), policy: .atEnd))
+        }.resume()
     }
 }
 

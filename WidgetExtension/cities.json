@@ -7,6 +7,36 @@
     {
         "name": "Copenhagen",
         "temperature": "31°C",
-        "precipitation": "75%"
+        "precipitation": "75 %"
+    },
+    {
+        "name": "Madrid",
+        "temperature": "40°C",
+        "precipitation": "0 %"
+    },
+    {
+        "name": "Paris",
+        "temperature": "22°C",
+        "precipitation": "80 %"
+    },
+    {
+        "name": "Prague",
+        "temperature": "33°C",
+        "precipitation": "15 %"
+    },
+    {
+        "name": "Lisbon",
+        "temperature": "40°C",
+        "precipitation": "0%"
+    },
+    {
+        "name": "Berlin",
+        "temperature": "20°C",
+        "precipitation": "14%"
+    },
+    {
+        "name": "Zurich",
+        "temperature": "18°C",
+        "precipitation": "20%"
     }
 ]
