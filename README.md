@@ -163,18 +163,23 @@ To hide sensitive data like the age of the animal ;-), use the modifier `.privac
 	<img src="./screenshots/sensitive.jpg" width="45%">
 </p>
 
+### Create widgets' timeline with asynchronous data
 
+Inside the method `getTimeline(context:completion:)`, we can perform an asynchronous task that calls the completion when resolved, passing the timeline entries.
 
+It's also possible to indicate a `TimelineReloadPolicy` as with synchronous tasks.
 
+With the widget modifier `onBackgroundURLSessionEvents`, we receive background session events as if it were a delegate.
 
+I created a lock screen widget that fetches asynchronously weather information about some cities (request to a local URL).
 
+I added the widget to the bundle, and as it only contains lock screen families, it's only available from the lock screen.
 
-
-
-
-
-
-
+<p align="center">
+	<img src="./screenshots/city.inline.jpg" width="30%">
+	<img src="./screenshots/city.circular.jpg" width="30%">
+	<img src="./screenshots/city.rectangular.jpg" width="30%">
+</p>
 
 
 
