@@ -17,10 +17,24 @@ struct AnimalsWidgetBundle: WidgetBundle {
     var body: some Widget {
         WidgetExtension()
         LargeWidgetExtension()
+        CitiesWidgetExtension()
     }
 }
 
 // MARK: - Widget extension
+
+struct CitiesWidgetExtension: Widget {
+    let kind: String = "CitiesWidgetExtension"
+    
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: CitiesProvider(), content: { entry in
+            CitiesWidgetExtensionEntryView()
+        })
+        .configurationDisplayName("Cities' widget")
+        .description("Displays the weather in a city.")
+        .supportedFamilies([.accessoryInline, .accessoryCircular, .accessoryRectangular])
+    }
+}
 
 struct LargeWidgetExtension: Widget {
     let kind: String = "LargeWidgetExtension"
@@ -70,6 +84,14 @@ struct WidgetExtension_Previews: PreviewProvider {
                 .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
                 .previewDisplayName("Rectangular")
         }
+    }
+}
+
+// MARK: - Cities' widget view
+
+struct CitiesWidgetExtensionEntryView: View {
+    var body: some View {
+        Text("Cities' widget")
     }
 }
 
@@ -176,6 +198,11 @@ struct PlaceholderView: View {
 
 // MARK: - Timeline entry
 
+struct CityEntry: TimelineEntry {
+    let city: City
+    let date: Date
+}
+
 struct SimpleEntry: TimelineEntry {
     let animal: AnimalDetail
     let date: Date
@@ -189,6 +216,25 @@ struct SimpleEntry: TimelineEntry {
 }
 
 // MARK: - Timeline provider
+
+struct CitiesProvider: TimelineProvider {
+    typealias Entry = CityEntry
+    
+    func placeholder(in context: Context) -> CityEntry {
+        .init(city: .init(name: "Roma", temperature: "33°C", precipitation: "23 %"), date: .now)
+    }
+    
+    func getSnapshot(in context: Context, completion: @escaping (CityEntry) -> Void) {
+        completion(.init(city: .init(name: "Roma", temperature: "33°C", precipitation: "23 %"), date: .now))
+    }
+    
+    func getTimeline(in context: Context, completion: @escaping (Timeline<CityEntry>) -> Void) {
+        let timeline = Timeline(entries: [
+            CityEntry(city: .init(name: "Roma", temperature: "33°C", precipitation: "23 %"), date: .now)
+        ], policy: .atEnd)
+        completion(timeline)
+    }
+}
 
 struct Provider: IntentTimelineProvider {
     typealias Entry = SimpleEntry

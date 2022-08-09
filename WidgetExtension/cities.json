@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Milano",
+        "temperature": "34°C",
+        "precipitation": "2 %"
+    },
+    {
+        "name": "Copenhagen",
+        "temperature": "31°C",
+        "precipitation": "75%"
+    }
+]
