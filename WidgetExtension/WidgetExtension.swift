@@ -24,15 +24,19 @@ struct AnimalsWidgetBundle: WidgetBundle {
 // MARK: - Widget extension
 
 struct CitiesWidgetExtension: Widget {
-    let kind: String = "CitiesWidgetExtension"
+    static let kind: String = "CitiesWidgetExtension"
     
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: CitiesProvider(), content: { entry in
+        StaticConfiguration(kind: Self.kind, provider: CitiesProvider(), content: { entry in
             CitiesWidgetExtensionEntryView(city: entry.city)
         })
         .configurationDisplayName("Cities' widget")
         .description("Displays the weather in a city.")
         .supportedFamilies([.accessoryInline, .accessoryCircular, .accessoryRectangular])
+        .onBackgroundURLSessionEvents { identifier, completion in
+            guard identifier == Self.kind else { return }
+            completion()
+        }
     }
 }
 
@@ -261,7 +265,7 @@ struct SimpleEntry: TimelineEntry {
 
 // MARK: - Timeline provider
 
-struct CitiesProvider: TimelineProvider {
+class CitiesProvider: NSObject, TimelineProvider {
     typealias Entry = CityEntry
     
     func placeholder(in context: Context) -> CityEntry {
@@ -272,18 +276,29 @@ struct CitiesProvider: TimelineProvider {
         completion(.init(city: .init(name: "Roma", temperature: "33°C", precipitation: "23 %"), date: .now))
     }
     
+    var session: URLSession?
+    var completion: ((Timeline<CityEntry>) -> Void)?
+    
     func getTimeline(in context: Context, completion: @escaping (Timeline<CityEntry>) -> Void) {
-        let path = Bundle.main.url(forResource: "cities", withExtension: "json")!
-        var request = URLRequest(url: path)
+        self.completion = completion
+        var request = URLRequest(url: .init(string: "https://raw.githubusercontent.com/serg-ios/Widgets/main/WidgetExtension/cities.json")!)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        URLSession.shared.dataTask(with: request) { data, _, _ in
-            let cities = try! JSONDecoder().decode(Cities.self, from: data!)
-            completion(.init(entries: {
-                cities.enumerated().map {
-                    .init(city: $0.element, date: .now.addingTimeInterval(5 * TimeInterval($0.offset)))
-                }
-            }(), policy: .atEnd))
-        }.resume()
+        let configuration = URLSessionConfiguration.background(withIdentifier: CitiesWidgetExtension.kind)
+        configuration.timeoutIntervalForRequest = 60 * 15
+        session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+        session?.dataTask(with: request).resume()
+    }
+}
+
+extension CitiesProvider: URLSessionDelegate, URLSessionDataDelegate {
+    
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        let cities = try! JSONDecoder().decode(Cities.self, from: data)
+        self.completion?(.init(entries: {
+            cities.enumerated().map {
+                .init(city: $0.element, date: .now.addingTimeInterval(5 * TimeInterval($0.offset)))
+            }
+        }(), policy: .atEnd))
     }
 }
 
